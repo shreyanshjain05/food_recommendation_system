@@ -43,6 +43,7 @@ def truncate(text, length):
     else:
         return text
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
