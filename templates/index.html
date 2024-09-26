@@ -29,10 +29,6 @@
             border-radius: 5px;
             box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
         }
-        .form-control {
-            border-radius: 5px;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-        }
         .form-control:focus {
             border-color: #5cb85c;
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
@@ -70,10 +66,9 @@
             justify-content: space-between;
         }
         .truncate-text {
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal; /* Allow text to wrap */
+            overflow: visible; /* Ensure full text is visible */
+            text-overflow: clip; /* Prevent truncation effect */
         }
         .header-title {
             color: #000; /* Black color for the title */
@@ -81,6 +76,14 @@
             margin-bottom: 30px;
         }
     </style>
+    <script>
+        // Function to toggle visibility of nutritional fields
+        function toggleFields() {
+            const nutritionalFields = document.getElementById('nutritional-fields');
+            const ingredientOnly = document.getElementById('ingredientOnly').checked;
+            nutritionalFields.style.display = ingredientOnly ? 'none' : 'block';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -89,45 +92,58 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-container">
+                    <!-- Option to choose mode -->
                     <form method="post" class="mt-4">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="calories">Calories (kcal)</label>
-                                <input type="number" class="form-control" id="calories" name="calories" step="any" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="fat">Fat (g)</label>
-                                <input type="number" class="form-control" id="fat" name="fat" step="any" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="carbohydrates">Carbohydrates (g)</label>
-                                <input type="number" class="form-control" id="carbohydrates" name="carbohydrates" step="any" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="protein">Protein (g)</label>
-                                <input type="number" class="form-control" id="protein" name="protein" step="any" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="cholesterol">Cholesterol (mg)</label>
-                                <input type="number" class="form-control" id="cholesterol" name="cholesterol" step="any" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="sodium">Sodium (mg)</label>
-                                <input type="number" class="form-control" id="sodium" name="sodium" step="any" required>
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label for="fiber">Fiber (g)</label>
-                            <input type="number" class="form-control" id="fiber" name="fiber" step="any" required>
+                            <label for="option">Choose your option:</label><br>
+                            <input type="radio" id="fullOption" name="option" value="full" checked onclick="toggleFields()"> Input Nutritional Values<br>
+                            <input type="radio" id="ingredientOnly" name="option" value="ingredients" onclick="toggleFields()"> Only Ingredients<br>
                         </div>
+
+                        <!-- Nutritional Values Fields -->
+                        <div id="nutritional-fields">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="calories">Calories (kcal)</label>
+                                    <input type="number" class="form-control" id="calories" name="calories" step="any">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fat">Fat (g)</label>
+                                    <input type="number" class="form-control" id="fat" name="fat" step="any">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="carbohydrates">Carbohydrates (g)</label>
+                                    <input type="number" class="form-control" id="carbohydrates" name="carbohydrates" step="any">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="protein">Protein (g)</label>
+                                    <input type="number" class="form-control" id="protein" name="protein" step="any">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="cholesterol">Cholesterol (mg)</label>
+                                    <input type="number" class="form-control" id="cholesterol" name="cholesterol" step="any">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sodium">Sodium (mg)</label>
+                                    <input type="number" class="form-control" id="sodium" name="sodium" step="any">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="fiber">Fiber (g)</label>
+                                <input type="number" class="form-control" id="fiber" name="fiber" step="any">
+                            </div>
+                        </div>
+
+                        <!-- Ingredients Field (always visible) -->
                         <div class="form-group">
                             <label for="ingredients">Ingredients</label>
                             <input type="text" class="form-control" id="ingredients" name="ingredients" required>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Get Recommendations</button>
                     </form>
                 </div>
