@@ -1,0 +1,38 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+/* Hide the login and register buttons */
+nav a[href*="login"], nav a[href*="register"] {
+    display: none !important;
+}
