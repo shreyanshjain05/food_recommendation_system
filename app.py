@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__, template_folder='/Users/shreyanshjain/PycharmProjects/food_recommendation_system/templates')
+app = Flask(__name__, template_folder='templates')
 app.secret_key = os.getenv('SECRET_KEY', 'your_secret_key')  # Ensure secret key is loaded
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
